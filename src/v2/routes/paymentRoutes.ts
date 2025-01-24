@@ -1,10 +1,8 @@
-import { Router } from 'express';
-import { PaymentController } from '../controllers/paymentController';
 
-const router = Router();
-const paymentController = new PaymentController();
+import { Express } from 'express';
+import { processPayment, getPaymentStatus } from '../controllers/paymentController';
 
-export const setPaymentRoutes = (app) => {
-    app.post('/api/v2/payments', paymentController.processPayment);
-    app.get('/api/v2/payments/:id/status', paymentController.getPaymentStatus);
+export const setPaymentRoutes = (app: Express) => {
+    app.post('/api/v2/payments', processPayment);
+    app.get('/api/v2/payments/:id', getPaymentStatus);
 };
