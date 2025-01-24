@@ -5,9 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "test": "jest"
+    "test": "jest --config jest.config.js"
   },
- 
   "dependencies": {
     "axios": "^1.7.9",
     "body-parser": "^1.19.0",
