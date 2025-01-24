@@ -5,7 +5,7 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "test": "jest --config jest.config.js --passWithNoTests"
+    "test": "jest --config jest.config.js"
     
   },
   "dependencies": {
