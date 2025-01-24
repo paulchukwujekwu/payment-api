@@ -5,8 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "test": "jest --config jest.config.js --passWithNoTests",
-    "server": "nodemon src/app.ts"
+    "test": "jest --config jest.config.js --passWithNoTests"
+    
   },
   "dependencies": {
     "axios": "^1.7.9",
