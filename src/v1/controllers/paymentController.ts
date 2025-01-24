@@ -68,7 +68,7 @@
 import { Request, Response } from 'express';
 import { createPayment, getPaymentStatus as getPaymentStatusService } from '../services/paymentService';
 
-export const processPayment = async (req: Request, res: Response) => {
+export const initiatePayment = async (req: Request, res: Response) => {
     try {
         const { customer_name, customer_email, amount } = req.body;
         const payment = await createPayment(customer_email, amount);

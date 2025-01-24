@@ -26,9 +26,9 @@
 //     app.get('/api/v2/payments/:id', getPaymentStatus);
 // };
 import { Express } from 'express';
-import { processPayment, getPaymentStatus } from '../controllers/paymentController';
+import { initiatePayment, getPaymentStatus } from '../controllers/paymentController';
 
 export const setPaymentRoutes = (app: Express) => {
-    app.post('/api/v1/payments', processPayment);
+    app.post('/api/v1/payments', initiatePayment);
     app.get('/api/v1/payments/:id', getPaymentStatus);
 };
