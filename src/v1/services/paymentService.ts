@@ -18,36 +18,79 @@
 //     }
 // }
 // filepath: /c:/payment-gateway-api/payment-api/src/v1/services/paymentService.ts
+// import axios from 'axios';
+
+// const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+
+// export const createPayment = async (email: string, amount: number) => {
+//     const response = await axios.post(
+//         'https://api.paystack.co/transaction/initialize',
+//         {
+//             email,
+//             amount: amount * 100, // Paystack expects amount in kobo
+//         },
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+//                 'Content-Type': 'application/json',
+//             },
+//         }
+//     );
+//     return response.data;
+// };
+
+// export const getPaymentStatus = async (reference: string) => {
+//     const response = await axios.get(
+//         `https://api.paystack.co/transaction/verify/${reference}`,
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+//                 'Content-Type': 'application/json',
+//             },
+//         }
+//     );
+//     return response.data;
+// };
 import axios from 'axios';
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 export const createPayment = async (email: string, amount: number) => {
-    const response = await axios.post(
-        'https://api.paystack.co/transaction/initialize',
-        {
-            email,
-            amount: amount * 100, // Paystack expects amount in kobo
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-                'Content-Type': 'application/json',
+    try {
+        const response = await axios.post(
+            'https://api.paystack.co/transaction/initialize',
+            {
+                email,
+                amount: amount * 100, // Paystack expects amount in kobo
             },
-        }
-    );
-    return response.data;
+            {
+                headers: {
+                    Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error creating payment:', error);
+        throw error;
+    }
 };
 
 export const getPaymentStatus = async (reference: string) => {
-    const response = await axios.get(
-        `https://api.paystack.co/transaction/verify/${reference}`,
-        {
-            headers: {
-                Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-                'Content-Type': 'application/json',
-            },
-        }
-    );
-    return response.data;
+    try {
+        const response = await axios.get(
+            `https://api.paystack.co/transaction/verify/${reference}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error retrieving payment status:', error);
+        throw error;
+    }
 };
