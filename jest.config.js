@@ -8,5 +8,9 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     transform: {
         '^.+\\.ts$': 'ts-jest',
+        '^.+\\.js$': 'babel-jest',
     },
+    transformIgnorePatterns: [
+        '/node_modules/(?!(chai)/)', // Transform chai module
+    ],
 };

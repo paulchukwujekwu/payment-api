@@ -1,53 +1,58 @@
-// export class PaymentService {
-//     initiatePayment(amount: number, currency: string): { success: boolean; message: string } {
-//         // Logic for processing the payment
-//         if (amount <= 0) {
-//             return { success: false, message: "Invalid payment amount." };
-//         }
-//         // Simulate payment processing
-//         return { success: true, message: "Payment processed successfully." };
-//     }
-
-//     checkPaymentStatus(paymentId: string): { success: boolean; status: string } {
-//         // Logic for checking payment status
-//         if (!paymentId) {
-//             return { success: false, status: "Payment ID is required." };
-//         }
-//         // Simulate payment status check
-//         return { success: true, status: "Payment is completed." };
-//     }
-// }
-// filepath: /c:/payment-gateway-api/payment-api/src/v1/services/paymentService.ts
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 export const createPayment = async (email: string, amount: number) => {
-    const response = await axios.post(
-        'https://api.paystack.co/transaction/initialize',
-        {
-            email,
-            amount: amount * 100, // Paystack expects amount in kobo
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-                'Content-Type': 'application/json',
+    try {
+        const reference = uuidv4(); // Generate a unique reference
+        console.log('Generated reference:', reference);
+
+        const headers = {
+            Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+            'Content-Type': 'application/json',
+        };
+        console.log('Headers:', headers);
+
+        const response = await axios.post(
+            'https://api.paystack.co/transaction/initialize',
+            {
+                email,
+                amount: amount * 100, // Paystack expects amount in kobo
+                reference, // Include the unique reference
             },
+            { headers }
+        );
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Error creating payment:', error.response ? error.response.data : error.message);
+        } else {
+            console.error('Error creating payment:', (error as Error).message);
         }
-    );
-    return response.data;
+        throw error;
+    }
 };
 
 export const getPaymentStatus = async (reference: string) => {
-    const response = await axios.get(
-        `https://api.paystack.co/transaction/verify/${reference}`,
-        {
-            headers: {
-                Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-                'Content-Type': 'application/json',
-            },
+    try {
+        const headers = {
+            Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+            'Content-Type': 'application/json',
+        };
+        console.log('Headers:', headers);
+
+        const response = await axios.get(
+            `https://api.paystack.co/transaction/verify/${reference}`,
+            { headers }
+        );
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Error retrieving payment status:', error.response ? error.response.data : error.message);
+        } else {
+            console.error('Error retrieving payment status:', (error as Error).message);
         }
-    );
-    return response.data;
+        throw error;
+    }
 };
