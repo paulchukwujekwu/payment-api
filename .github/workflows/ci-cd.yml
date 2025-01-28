@@ -26,6 +26,10 @@ jobs:
 
       - name: Run tests
         run: npm test
+        env:
+          PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
       - name: Build the application
         run: npm run build
+        env:
+          PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
