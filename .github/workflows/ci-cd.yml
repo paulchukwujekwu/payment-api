@@ -36,3 +36,11 @@ jobs:
         run: npm run build
         env:
           PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+
+      # Uncomment the deploy step when you are ready to deploy
+      # - name: Deploy
+      #   run: npm run deploy
+      #   env:
+      #     NODE_ENV: production
+      #     PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+      #     DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
