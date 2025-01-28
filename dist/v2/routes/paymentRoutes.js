@@ -7,3 +7,4 @@ const setPaymentRoutes = (app) => {
     app.get('/api/v2/payments/:id', paymentController_1.getPaymentStatus);
 };
 exports.setPaymentRoutes = setPaymentRoutes;
+//# sourceMappingURL=paymentRoutes.js.map

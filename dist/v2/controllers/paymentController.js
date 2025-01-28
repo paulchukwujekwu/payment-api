@@ -21,3 +21,4 @@ const getPaymentStatus = (req, res) => {
     res.status(200).json({ message: "Payment status retrieved successfully", paymentId });
 };
 exports.getPaymentStatus = getPaymentStatus;
+//# sourceMappingURL=paymentController.js.map
