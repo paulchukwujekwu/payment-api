@@ -31,7 +31,7 @@ jobs:
         run: chmod +x ./node_modules/.bin/ts-mocha
 
       - name: Run tests
-        run: ./node_modules/.bin/ts-mocha src/__tests__/app.test.ts'
+        run: ./node_modules/.bin/ts-mocha src/__tests__/app.test.ts
         env:
           PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
