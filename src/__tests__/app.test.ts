@@ -1,10 +1,3 @@
-import fetch, { Response, Request, Headers } from 'node-fetch';
-
-(global as any).Response = Response;
-(global as any).Request = Request;
-(global as any).Headers = Headers;
-(global as any).fetch = fetch;
-
 import request from 'supertest';
 import app from '../app';
 import nock from 'nock';
