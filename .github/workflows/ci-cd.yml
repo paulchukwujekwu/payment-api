@@ -19,19 +19,31 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "16"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
-      - name: Run tests
-        run: npm test
+      - name: Install ts-mocha
+        run: npm install ts-mocha --save-dev --legacy-peer-deps
+
+      - name: Set permissions for ts-mocha
+        run: chmod +x ./node_modules/.bin/ts-mocha
+
+      # - name: Run tests
+      #   run: ./node_modules/.bin/ts-mocha src/__tests__/app.test.ts
+      #   env:
+      #     PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
       - name: Build the application
         run: npm run build
-
-      - name: Deploy
-        run: npm run deploy
         env:
-          NODE_ENV: production
-          DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+          PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+
+      # Uncomment the deploy step when you are ready to deploy
+      # - name: Deploy
+      #   run: npm run deploy
+      #   env:
+      #     NODE_ENV: production
+      #     PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+      #     DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}

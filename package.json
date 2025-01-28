@@ -5,15 +5,15 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "test": "jest --config jest.config.js"
+    "test": "ts-mocha src/__tests__/app.test.ts",
+    "build": "tsc",
+    "dev": "ts-node src/app.ts"
   },
   "dependencies": {
     "axios": "^1.7.9",
     "body-parser": "^1.19.0",
     "dotenv": "^16.4.7",
     "express": "^4.17.1",
-    "mocha": "^11.1.0",
-    "nock": "^13.5.6",
     "nodemon": "^3.1.9",
     "uuid": "^11.0.5"
   },
@@ -27,11 +27,17 @@
     "babel-jest": "^29.7.0",
     "chai": "^5.1.2",
     "chai-http": "^5.1.1",
+    "isomorphic-fetch": "^3.0.0",
     "jest": "^29.0.0",
+    "mocha": "^11.1.0",
+    "nock": "^14.0.0",
+    "node-fetch": "^3.3.2",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5",
+    "web-streams-polyfill": "^4.1.0"
   },
   "repository": {
     "type": "git",

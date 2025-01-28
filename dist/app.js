@@ -13,7 +13,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express_1.default.json());
 (0, paymentRoutes_1.setPaymentRoutes)(app);
 (0, paymentRoutes_2.setPaymentRoutes)(app);
-app.listen(PORT, () => {
-    console.log(`Payment API is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Payment API is running on http://localhost:${PORT}`);
+// });
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Payment API is running on http://localhost:${PORT}`);
+    });
+}
 exports.default = app;
+//# sourceMappingURL=app.js.map
