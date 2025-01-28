@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Install Ts-Mocha
-        run: npm install ts-mocha --save-dev --force
+      # - name: Install Ts-Mocha
+      #   run: npm install ts-mocha --save-dev --force
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Fix Permissions
         run: chmod +x node_modules/.bin/mocha
