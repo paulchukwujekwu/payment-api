@@ -1,8 +1,7 @@
-import 'isomorphic-fetch';
-import { expect } from 'chai';
 import request from 'supertest';
 import app from '../app';
 import nock from 'nock';
+import { expect } from 'chai';
 
 describe('Payment API', () => {
     it('should initiate a payment', (done) => {
